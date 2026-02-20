@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 
 const capabilities = [
@@ -182,10 +183,9 @@ export default function CapacidadesPage() {
             {capabilities.map((cap, i) => {
               const cardStyle = {
                 animationDelay: `${i * 80}ms`,
-                // @ts-expect-error CSS custom property
                 '--accent': cap.accent,
                 '--accent-glow': cap.accent + '33',
-              };
+              } as React.CSSProperties;
 
               const inner = (
                 <>
