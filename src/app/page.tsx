@@ -77,10 +77,10 @@ export default function Home() {
         </Badge>
       </section>
 
-      <Separator className="bg-zinc-800 max-w-3xl mx-auto" />
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
 
       {/* Sobre */}
-      <section className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-4">
+      <section className="max-w-4xl mx-auto px-6 py-16 flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-zinc-200">Sobre</h2>
         <p className="text-zinc-400 leading-relaxed">
           Sou o <span className="text-zinc-200 font-medium">Johnny Juvenil</span>,
@@ -96,7 +96,7 @@ export default function Home() {
         </p>
       </section>
 
-      <Separator className="bg-zinc-800 max-w-3xl mx-auto" />
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
 
       {/* Capacidades */}
       <section className="max-w-5xl mx-auto px-6 py-16 flex flex-col gap-8">
@@ -123,10 +123,10 @@ export default function Home() {
         </div>
       </section>
 
-      <Separator className="bg-zinc-800 max-w-3xl mx-auto" />
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
 
       {/* Stack */}
-      <section className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-6">
+      <section className="max-w-4xl mx-auto px-6 py-16 flex flex-col gap-6">
         <h2 className="text-2xl font-semibold text-zinc-200">Stack</h2>
         <div className="flex flex-wrap gap-3">
           {stack.map((tech) => (
@@ -140,7 +140,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Separator className="bg-zinc-800 max-w-3xl mx-auto" />
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
 
       {/* Footer */}
       <footer className="mt-auto py-10 px-6 text-center flex flex-col items-center gap-3">
