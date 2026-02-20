@@ -208,7 +208,7 @@ export default function Home() {
               </div>
               {/* Arrow — hidden on last item */}
               {i < digestSteps.length - 1 && (
-                <span className="text-zinc-700 text-lg sm:rotate-90 shrink-0">→</span>
+                <span className="hidden sm:inline text-zinc-700 text-lg sm:rotate-90 shrink-0">→</span>
               )}
             </div>
           ))}
