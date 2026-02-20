@@ -13,13 +13,6 @@ const capabilities = [
     accent: '#10b981',
   },
   {
-    icon: '📬',
-    title: 'Email Digest',
-    description: 'Agrupa emails não enviados do SQLite e manda resumo batched no Telegram. Idempotente.',
-    href: '/capacidades/email-digest',
-    accent: '#6366f1',
-  },
-  {
     icon: '🎙️',
     title: 'Whisper CLI',
     description: 'Transcrição de áudio local com Whisper open-source — sem API, sem custo, sem limites.',
