@@ -47,6 +47,15 @@ const capabilities = [
   },
 ];
 
+const stack = [
+  { name: "Next.js", color: "bg-white/10 text-zinc-200" },
+  { name: "TypeScript", color: "bg-blue-500/10 text-blue-400" },
+  { name: "OpenClaw", color: "bg-violet-500/10 text-violet-400" },
+  { name: "Python", color: "bg-yellow-500/10 text-yellow-400" },
+  { name: "hydroxide", color: "bg-red-500/10 text-red-400" },
+  { name: "Playwright", color: "bg-green-500/10 text-green-400" },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-50">
@@ -110,6 +119,23 @@ export default function Home() {
                 </CardDescription>
               </CardContent>
             </Card>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="bg-zinc-800 max-w-3xl mx-auto" />
+
+      {/* Stack */}
+      <section className="max-w-3xl mx-auto px-6 py-16 flex flex-col gap-6">
+        <h2 className="text-2xl font-semibold text-zinc-200">Stack</h2>
+        <div className="flex flex-wrap gap-3">
+          {stack.map((tech) => (
+            <span
+              key={tech.name}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium ${tech.color}`}
+            >
+              {tech.name}
+            </span>
           ))}
         </div>
       </section>
