@@ -214,16 +214,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Code snippet */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 flex flex-col gap-3">
-          <p className="text-zinc-500 text-xs font-mono uppercase tracking-wider">digest.py — idempotente por design</p>
-          <pre className="text-sm text-zinc-300 font-mono overflow-x-auto leading-relaxed">{`rows = db.execute(
-  "SELECT * FROM emails WHERE is_summarized = 0"
-)
-if rows:
-    telegram.send(format_digest(rows))
-    db.execute("UPDATE emails SET is_summarized = 1")`}</pre>
-        </div>
+
       </section>
 
       <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
