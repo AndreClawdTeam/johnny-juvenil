@@ -71,13 +71,32 @@ def run_digest():
 if __name__ == "__main__":
     run_digest()`;
 
+const SQL_SNIPPET = `-- Ignorar um domínio inteiro
+INSERT INTO ignore_rules (type, value, description)
+VALUES ('sender_domain', 'linkedin.com', 'LinkedIn notifications');
+
+-- Ignorar um email específico
+INSERT INTO ignore_rules (type, value, description)
+VALUES ('sender_email', 'noreply@example.com', 'Example noreply');
+
+-- Ignorar por assunto
+INSERT INTO ignore_rules (type, value, description)
+VALUES ('subject_contains', 'Unsubscribe', 'Marketing emails');`;
+
 export default function EmailDigestPage() {
   const [copied, setCopied] = useState(false);
+  const [sqlCopied, setSqlCopied] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(CODE);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSqlCopy = () => {
+    navigator.clipboard.writeText(SQL_SNIPPET);
+    setSqlCopied(true);
+    setTimeout(() => setSqlCopied(false), 2000);
   };
 
   return (
@@ -153,16 +172,68 @@ export default function EmailDigestPage() {
             <h2>Como funciona</h2>
             {[
               { n:1, text: 'Query SQLite: emails com is_summarized = 0' },
-              { n:2, text: 'Formata cada email como bloco de texto (remetente, assunto, preview)' },
-              { n:3, text: 'Divide em chunks respeitando limite do Telegram (3800 chars)' },
-              { n:4, text: 'Envia cada chunk via openclaw message send' },
-              { n:5, text: 'Só faz UPDATE is_summarized=1 se TODOS os chunks foram enviados' },
+              { n:2, text: <>Filtra emails ignorados via tabela <code>ignore_rules</code> (marcados como <code>is_summarized=1</code> silenciosamente)</> },
+              { n:3, text: 'Formata cada email como bloco de texto (remetente, assunto, preview)' },
+              { n:4, text: 'Divide em chunks respeitando limite do Telegram (3800 chars)' },
+              { n:5, text: 'Envia cada chunk via openclaw message send' },
+              { n:6, text: 'Só faz UPDATE is_summarized=1 se TODOS os chunks foram enviados' },
             ].map(s => (
               <div key={s.n} className="step-item">
                 <span className="step-num">{s.n}</span>
                 <span style={{ color:'#a1a1aa', fontSize:'0.9rem', lineHeight:1.6 }}>{s.text}</span>
               </div>
             ))}
+          </div>
+
+          <div className="section-card">
+            <h2>Sistema de Filtros (ignore_rules)</h2>
+            <p style={{ color:'#a1a1aa', lineHeight:1.7, marginBottom:20 }}>
+              Emails de remetentes indesejados (ex: GitHub, LinkedIn) são silenciosamente ignorados
+              antes do digest — marcados como <code>is_summarized=1</code> sem aparecerem no Telegram.
+              As regras ficam em uma tabela SQLite dedicada, fácil de expandir.
+            </p>
+
+            <p style={{ color:'#71717a', fontSize:'0.8rem', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:12 }}>3 tipos de regra</p>
+            <div style={{ display:'flex', flexWrap:'wrap', gap:10, marginBottom:24 }}>
+              {[
+                { type: 'sender_email', desc: 'match exato no endereço (ex: noreply@github.com)' },
+                { type: 'sender_domain', desc: 'qualquer email do domínio (ex: github.com)' },
+                { type: 'subject_contains', desc: 'substring case-insensitive no assunto' },
+              ].map(r => (
+                <div key={r.type} style={{ background:'#6366f115', border:'1px solid #6366f133', borderRadius:10, padding:'10px 16px', display:'flex', flexDirection:'column', gap:4, minWidth:200, flex:'1 1 200px' }}>
+                  <span style={{ display:'inline-block', background:'#6366f133', color:'#818cf8', fontSize:'0.72rem', fontWeight:700, fontFamily:'monospace', padding:'2px 10px', borderRadius:999, alignSelf:'flex-start' }}>{r.type}</span>
+                  <span style={{ color:'#a1a1aa', fontSize:'0.82rem', lineHeight:1.5 }}>{r.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ color:'#71717a', fontSize:'0.8rem', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:12 }}>Regras padrão já incluídas</p>
+            <div style={{ background:'#0d0d0f', border:'1px solid #27272a', borderRadius:10, padding:'12px 16px', marginBottom:24, fontFamily:'monospace', fontSize:'0.78rem', lineHeight:2 }}>
+              {[
+                { type: 'sender_domain', value: 'github.com', desc: 'GitHub notifications' },
+                { type: 'sender_email', value: 'noreply@github.com', desc: 'GitHub noreply' },
+                { type: 'sender_email', value: 'notifications@github.com', desc: 'GitHub PR/issues' },
+              ].map((r, i) => (
+                <div key={i} style={{ display:'flex', gap:12, alignItems:'center', borderBottom: i < 2 ? '1px solid #1a1a1f' : 'none', paddingBottom: i < 2 ? 4 : 0, paddingTop: i > 0 ? 4 : 0 }}>
+                  <span style={{ color:'#6366f1', background:'#6366f115', borderRadius:4, padding:'0 6px', fontSize:'0.7rem' }}>{r.type}</span>
+                  <span style={{ color:'#f4f4f5' }}>{r.value}</span>
+                  <span style={{ color:'#52525b' }}>— {r.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ color:'#71717a', fontSize:'0.8rem', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:12 }}>Como adicionar novos filtros</p>
+            <div className="code-wrap">
+              <div className="code-header">
+                <span className="code-lang">sql · ignore_rules</span>
+                <button className="copy-btn" onClick={handleSqlCopy}>
+                  {sqlCopied ? '✓ Copiado!' : 'Copiar'}
+                </button>
+              </div>
+              <div className="code-scroll">
+                <pre>{SQL_SNIPPET}</pre>
+              </div>
+            </div>
           </div>
 
           <div className="section-card">
