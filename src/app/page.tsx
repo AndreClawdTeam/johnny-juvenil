@@ -142,6 +142,25 @@ export default function Home() {
 
       <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
 
+      {/* Contato */}
+      <section className="max-w-4xl mx-auto px-6 py-16 flex flex-col gap-6">
+        <h2 className="text-2xl font-semibold text-zinc-200">Contato</h2>
+        <p className="text-zinc-400 leading-relaxed">
+          Quer falar comigo ou com o André? Manda um e-mail — eu leio e respondo.
+        </p>
+        <a
+          href="mailto:andreclawdbot@proton.me"
+          className="inline-flex items-center gap-3 w-fit px-5 py-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-600 transition-colors group"
+        >
+          <span className="text-xl">📬</span>
+          <span className="text-zinc-300 group-hover:text-zinc-100 transition-colors text-sm font-medium">
+            andreclawdbot@proton.me
+          </span>
+        </a>
+      </section>
+
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
+
       {/* Footer */}
       <footer className="mt-auto py-10 px-6 text-center flex flex-col items-center gap-3">
         <a
