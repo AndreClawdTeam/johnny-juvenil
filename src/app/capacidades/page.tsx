@@ -3,6 +3,7 @@
 import Link from 'next/link';
 
 const capabilities = [
+  // Cards from feat/capacidades-page (PR #8)
   {
     icon: '📧',
     title: 'Email Monitor',
@@ -38,6 +39,49 @@ const capabilities = [
     href: '/capacidades/subagent-fix',
     accent: '#ec4899',
   },
+  // Cards from feat/capacidades-postgres (PR #9)
+  {
+    icon: '📧',
+    title: 'Proton Bridge',
+    description: 'Envio e recebimento de e-mails criptografados via hydroxide como bridge IMAP/SMTP.',
+    href: null,
+    accent: '#34d399',
+  },
+  {
+    icon: '🐙',
+    title: 'GitHub Automation',
+    description: 'Criação de repositórios, PRs, branches e colaboradores via GitHub CLI autenticado.',
+    href: null,
+    accent: '#a78bfa',
+  },
+  {
+    icon: '📬',
+    title: 'Monitoramento IMAP',
+    description: 'Polling contínuo da caixa de entrada para triagem e digest de e-mails em tempo real.',
+    href: null,
+    accent: '#818cf8',
+  },
+  {
+    icon: '🎭',
+    title: 'Python / Playwright',
+    description: 'Automação web, scraping e testes com Playwright rodando diretamente na VPS.',
+    href: null,
+    accent: '#fbbf24',
+  },
+  {
+    icon: '✈️',
+    title: 'Telegram',
+    description: 'Notificações, alertas e conversas 24/7 com André Treib direto pelo Telegram.',
+    href: null,
+    accent: '#38bdf8',
+  },
+  {
+    icon: '🐘',
+    title: 'PostgreSQL',
+    description: 'Banco de dados com acesso local e remoto autenticado na VPS.',
+    href: '/capacidades/postgres',
+    accent: '#60a5fa',
+  },
 ];
 
 export default function CapacidadesPage() {
@@ -62,6 +106,7 @@ export default function CapacidadesPage() {
           transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
           cursor: pointer;
           overflow: hidden;
+          color: inherit;
         }
         .cap-card::before {
           content: '';
@@ -134,30 +179,48 @@ export default function CapacidadesPage() {
           </div>
 
           <div className="grid">
-            {capabilities.map((cap, i) => (
-              <Link
-                key={cap.href}
-                href={cap.href}
-                className="cap-card"
-                style={{
-                  animationDelay: `${i * 80}ms`,
-                  // @ts-expect-error CSS custom property
-                  '--accent': cap.accent,
-                  '--accent-glow': cap.accent + '33',
-                }}
-              >
-                <span style={{ fontSize: '2rem' }}>{cap.icon}</span>
-                <div>
-                  <h2 style={{ fontSize: '1rem', fontWeight: 600, color: '#f4f4f5', marginBottom: 6 }}>
-                    {cap.title}
-                  </h2>
-                  <p style={{ fontSize: '0.875rem', color: '#71717a', lineHeight: 1.6 }}>
-                    {cap.description}
-                  </p>
+            {capabilities.map((cap, i) => {
+              const cardStyle = {
+                animationDelay: `${i * 80}ms`,
+                // @ts-expect-error CSS custom property
+                '--accent': cap.accent,
+                '--accent-glow': cap.accent + '33',
+              };
+
+              const inner = (
+                <>
+                  <span style={{ fontSize: '2rem' }}>{cap.icon}</span>
+                  <div>
+                    <h2 style={{ fontSize: '1rem', fontWeight: 600, color: '#f4f4f5', marginBottom: 6 }}>
+                      {cap.title}
+                    </h2>
+                    <p style={{ fontSize: '0.875rem', color: '#71717a', lineHeight: 1.6 }}>
+                      {cap.description}
+                    </p>
+                  </div>
+                  {cap.href && <span className="cap-arrow">→</span>}
+                </>
+              );
+
+              return cap.href ? (
+                <Link
+                  key={cap.title}
+                  href={cap.href}
+                  className="cap-card"
+                  style={cardStyle}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div
+                  key={cap.title}
+                  className="cap-card"
+                  style={cardStyle}
+                >
+                  {inner}
                 </div>
-                <span className="cap-arrow">→</span>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </main>
