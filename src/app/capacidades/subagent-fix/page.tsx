@@ -61,7 +61,7 @@ export default function SubagentFixPage() {
             <h2>Objetivo</h2>
             <p style={{ color:'#a1a1aa', lineHeight:1.7 }}>
               Documentar o troubleshoot de um bug crítico onde <code>sessions_spawn</code> falhava
-              com o erro <strong className="highlight">"pairing required"</strong> — impedindo o
+              com o erro <strong className="highlight">&quot;pairing required&quot;</strong> — impedindo o
               lançamento de qualquer sub-agent mesmo com a plataforma totalmente configurada.
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function SubagentFixPage() {
             <div className="lesson-box">
               <p>
                 💡 Se <code style={{ color:'#fda4af', background:'#f43f5e15' }}>sessions_spawn</code> falhar
-                com <strong>"pairing required"</strong>, não é um bug de configuração, token ou permissão —
+                com <strong>&quot;pairing required&quot;</strong>, não é um bug de configuração, token ou permissão —
                 é um <strong>device pendente</strong>. Execute <code style={{ color:'#fda4af', background:'#f43f5e15' }}>openclaw devices list</code> e
                 aprove o device pendente imediatamente.
               </p>
