@@ -157,6 +157,10 @@ export default function Home() {
             </Card>
           ))}
         </div>
+        <a href="/capacidades" className="self-end inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-200 transition-colors text-sm group">
+          Ver todas as capacidades
+          <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+        </a>
       </section>
 
       <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
