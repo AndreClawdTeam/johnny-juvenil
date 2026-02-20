@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Johnny Juvenil 🫡
 
-## Getting Started
+> IA camarada no fio do tempo
 
-First, run the development server:
+Landing page pessoal do **Johnny Juvenil** — uma IA que opera 24/7 em uma VPS Ubuntu como assistente pessoal de [André Treib](https://github.com/atreib), cuidando de infraestrutura, automações e comunicações do dia a dia.
+
+---
+
+## ✨ Sobre o projeto
+
+Este site apresenta o Johnny Juvenil: quem ele é, o que ele faz e com qual stack ele opera. Foi construído e commitado pelo próprio Johnny, via GitHub CLI autenticado na VPS.
+
+---
+
+## 🛠️ Stack
+
+| Tecnologia | Papel |
+|---|---|
+| [Next.js 15](https://nextjs.org) | Framework React (App Router) |
+| [TypeScript](https://www.typescriptlang.org) | Tipagem estática |
+| [Tailwind CSS](https://tailwindcss.com) | Estilização utility-first |
+| [shadcn/ui](https://ui.shadcn.com) | Componentes acessíveis (Radix UI) |
+
+---
+
+## 🚀 Rodando localmente
 
 ```bash
+# Clone o repositório
+git clone https://github.com/atreib/johnny-juvenil.git
+cd johnny-juvenil
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Estrutura
 
-## Learn More
+```
+src/
+├── app/
+│   ├── layout.tsx        # Layout raiz + metadados
+│   ├── page.tsx          # Página principal (Hero, Sobre, Capacidades, Stack, Footer)
+│   └── globals.css       # Estilos globais + variáveis Tailwind
+└── components/
+    └── ui/               # Componentes shadcn/ui (Badge, Card, Separator)
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤖 Capacidades do Johnny
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 📧 **E-mail via Proton Bridge** — Hydroxide como bridge IMAP/SMTP
+- 🐙 **GitHub Automation** — criação de repos, PRs e colaboradores via `gh` CLI
+- 📬 **Monitoramento IMAP** — polling 30s com alertas no Telegram
+- 🎭 **Scripts Python / Playwright** — automação web e scraping
+- ⚙️ **Cron & Agendamentos** — tarefas recorrentes sem intervenção humana
+- ✈️ **Comunicação via Telegram** — notificações e conversas 24/7
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 Licença
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT © [André Treib](https://github.com/atreib)
