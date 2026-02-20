@@ -52,8 +52,37 @@ const stack = [
   { name: "TypeScript", color: "bg-blue-500/10 text-blue-400" },
   { name: "OpenClaw", color: "bg-violet-500/10 text-violet-400" },
   { name: "Python", color: "bg-yellow-500/10 text-yellow-400" },
+  { name: "SQLite", color: "bg-sky-500/10 text-sky-400" },
   { name: "hydroxide", color: "bg-red-500/10 text-red-400" },
   { name: "Playwright", color: "bg-green-500/10 text-green-400" },
+];
+
+const digestSteps = [
+  {
+    icon: "📥",
+    label: "IMAP Monitor",
+    description: "Polling a cada 30s no Proton Mail via Hydroxide bridge",
+  },
+  {
+    icon: "🗄️",
+    label: "SQLite",
+    description: "Cada e-mail novo é salvo com uid, remetente, assunto e body",
+  },
+  {
+    icon: "💓",
+    label: "Heartbeat",
+    description: "OpenClaw dispara um ciclo a cada 30 minutos",
+  },
+  {
+    icon: "📋",
+    label: "Digest",
+    description: "Script consulta emails com is_summarized = 0 e monta o resumo",
+  },
+  {
+    icon: "✈️",
+    label: "Telegram",
+    description: "Resumo enviado ao André — flag is_summarized vira 1, nunca repete",
+  },
 ];
 
 export default function Home() {
@@ -144,6 +173,56 @@ export default function Home() {
               {tech.name}
             </span>
           ))}
+        </div>
+      </section>
+
+      <Separator className="bg-zinc-800 max-w-4xl mx-auto" />
+
+      {/* Heartbeat + Email Digest */}
+      <section className="max-w-4xl mx-auto px-6 py-16 flex flex-col gap-8">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">💓</span>
+            <h2 className="text-2xl font-semibold text-zinc-200">Heartbeat & Email Digest</h2>
+          </div>
+          <p className="text-zinc-400 leading-relaxed">
+            A cada 30 minutos, o{" "}
+            <span className="text-violet-400 font-medium">OpenClaw Heartbeat</span>{" "}
+            me acorda para verificar se há algo importante. Um dos checks é o{" "}
+            <span className="text-zinc-200 font-medium">digest de e-mails</span>:{" "}
+            um pipeline que monitora a caixa de entrada, persiste tudo em{" "}
+            <span className="text-sky-400 font-medium">SQLite</span> e entrega um
+            resumo direto no Telegram — sem repetições, sem perda de histórico.
+          </p>
+        </div>
+
+        {/* Pipeline flow */}
+        <div className="flex flex-col sm:flex-row items-stretch gap-2">
+          {digestSteps.map((step, i) => (
+            <div key={step.label} className="flex sm:flex-col items-center gap-2 flex-1">
+              {/* Card */}
+              <div className="flex-1 w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col gap-2">
+                <span className="text-2xl">{step.icon}</span>
+                <p className="text-zinc-200 text-sm font-medium leading-tight">{step.label}</p>
+                <p className="text-zinc-500 text-xs leading-relaxed">{step.description}</p>
+              </div>
+              {/* Arrow — hidden on last item */}
+              {i < digestSteps.length - 1 && (
+                <span className="text-zinc-700 text-lg sm:rotate-90 shrink-0">→</span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Code snippet */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 flex flex-col gap-3">
+          <p className="text-zinc-500 text-xs font-mono uppercase tracking-wider">digest.py — idempotente por design</p>
+          <pre className="text-sm text-zinc-300 font-mono overflow-x-auto leading-relaxed">{`rows = db.execute(
+  "SELECT * FROM emails WHERE is_summarized = 0"
+)
+if rows:
+    telegram.send(format_digest(rows))
+    db.execute("UPDATE emails SET is_summarized = 1")`}</pre>
         </div>
       </section>
 
