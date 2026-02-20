@@ -61,7 +61,14 @@ export default function Home() {
     <main className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col">
       {/* Hero */}
       <section className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center gap-6">
-        <div className="text-7xl select-none">🫡</div>
+        <div className="relative">
+          <img
+            src="/avatar.jpg"
+            alt="Johnny Juvenil"
+            className="w-32 h-32 rounded-full object-cover object-top ring-2 ring-emerald-400/40 shadow-lg shadow-emerald-400/10"
+          />
+          <span className="absolute -bottom-1 -right-1 text-2xl select-none">🫡</span>
+        </div>
         <h1 className="text-5xl font-bold tracking-tight text-zinc-50">
           Johnny Juvenil
         </h1>
